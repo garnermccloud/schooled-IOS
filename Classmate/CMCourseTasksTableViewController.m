@@ -14,25 +14,18 @@
 
 @implementation CMCourseTasksTableViewController
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-	// Do any additional setup after loading the view.
-    
-    [self.meteor addSubscription:@"tasks" withParameters:@[self.course[@"_id"]]];
-    
-    
-    
-}
+
 
 -(void)viewWillAppear:(BOOL)animated
 {
+        [super viewWillAppear:YES];
     self.listName = self.course[@"title"];
-    [self.meteor addSubscription:@"tasks" withParameters:@[self.course[@"_id"]]];
-    
-    [super viewWillAppear:YES];
+}
 
-    
+-(void)loadSubscriptions
+{
+        [super loadSubscriptions];
+    [self.meteor addSubscription:@"tasks" withParameters:@[self.course[@"_id"]]];
 }
 
 

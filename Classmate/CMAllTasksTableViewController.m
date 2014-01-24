@@ -7,6 +7,7 @@
 //
 
 #import "CMAllTasksTableViewController.h"
+#import "CMTaskDetailViewController.h"
 
 @interface CMAllTasksTableViewController ()
 
@@ -14,28 +15,27 @@
 
 @implementation CMAllTasksTableViewController
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-	// Do any additional setup after loading the view.
-    
-    
-}
 
 -(void)viewWillAppear:(BOOL)animated
 {
-    self.listName = @"Upcoming Tasks";
-    for (NSDictionary *course in self.courses) {
-        [self.meteor addSubscription:@"tasks" withParameters:@[course[@"_id"]]];
-    }
     
     [super viewWillAppear:YES];
+    self.listName = @"Upcoming Tasks";
     
     
 }
 
 
 #pragma mark - Meteor Collection Querying
+
+-(void)loadSubscriptions
+{
+        [super loadSubscriptions];
+    for (NSDictionary *course in self.courses) {
+        [self.meteor addSubscription:@"tasks" withParameters:@[course[@"_id"]]];
+    }
+
+}
 
 - (NSDictionary *)currentUser
 {
@@ -44,7 +44,6 @@
 
 - (NSArray *)courses
 {
-    [self.meteor addSubscription:@"courses"];
     NSPredicate *pred = [NSPredicate predicateWithFormat:@"(_id IN %@)", self.currentUser[@"courses"]];
     return [self.meteor.collections[@"courses"] filteredArrayUsingPredicate:pred];
 }
@@ -105,6 +104,31 @@
     cell.detailTextLabel.text = [dateFormatter  stringFromDate:date];
     return cell;
 }
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+    
+    if ([sender isKindOfClass:[UITableViewCell class]]) {
+        
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
+        if (indexPath) {
+            if ([segue.identifier isEqualToString:@"Select Task"]) {
+                if ([segue.destinationViewController isKindOfClass:[CMTaskDetailViewController class]]) {
+                    CMTaskDetailViewController * cmtdvc = (CMTaskDetailViewController *) segue.destinationViewController;
+                    NSDictionary *task = self.tasks[indexPath.row];
+                    cmtdvc.taskId = task[@"_id"];
+                    NSPredicate *pred = [NSPredicate predicateWithFormat:@"(_id like %@)", task[@"courseId"]];
+
+                    
+                    cmtdvc.course = [[self.meteor.collections[@"courses"] filteredArrayUsingPredicate:pred] firstObject];
+                }
+            }
+        }
+    }
+}
+
 
 
 

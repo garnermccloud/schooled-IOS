@@ -19,14 +19,17 @@
 @implementation CMCoursesTableViewController
 
 
-- (void)viewDidLoad
+
+- (void)viewWillAppear:(BOOL)animated
 {
-    [super viewDidLoad];
-	// Do any additional setup after loading the view.
+    [super viewWillAppear:YES];
     self.navigationItem.leftBarButtonItem = self.editButtonItem;
-    
     self.listName = @"My Courses";
-    
+
+}
+
+-(void)loadSubscriptions {
+        [super loadSubscriptions];
 }
 
 

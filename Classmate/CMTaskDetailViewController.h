@@ -10,4 +10,12 @@
 
 @interface CMTaskDetailViewController : CMViewController
 
+@property (nonatomic, strong) NSDictionary *course;
+
+@property (nonatomic, strong) NSDictionary *task;
+
+@property (nonatomic, strong) NSString *taskId;
+
+
+
 @end

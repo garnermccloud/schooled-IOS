@@ -27,11 +27,13 @@
     if (!self.meteor.userId) {
         [self performSegueWithIdentifier:@"Login" sender:self];
     }
+    
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
     self.navigationItem.title = nil;
+    [self loadSubscriptions];
     [self reloadUI];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -46,9 +48,24 @@
                                              selector:@selector(didReceiveUpdate:)
                                                  name:@"changed"
                                                object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(didReceiveUpdate:)
+                                                 name:MeteorClientDidConnectNotification
+                                               object:nil];
+}
+
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void)loadSubscriptions {
+    [self.meteor addSubscription:@"currentUser"];
+    [self.meteor addSubscription:@"courses"];
 }
 
 - (void)didReceiveUpdate:(NSNotification *)notification {
+    [self loadSubscriptions];
     [self reloadUI];
 }
 

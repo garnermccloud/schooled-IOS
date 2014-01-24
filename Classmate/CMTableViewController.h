@@ -17,4 +17,6 @@
 
 @property (nonatomic, strong) NSString *listName;
 
+-(void)loadSubscriptions;
+
 @end

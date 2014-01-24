@@ -42,6 +42,7 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     self.navigationItem.title = self.listName;
+    [self loadSubscriptions];
     [self.tableView reloadData];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -56,9 +57,20 @@
                                              selector:@selector(didReceiveUpdate:)
                                                  name:@"changed"
                                                object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(didReceiveUpdate:)
+                                                 name:MeteorClientDidConnectNotification
+                                               object:nil];
+}
+
+-(void)loadSubscriptions
+{
+    [self.meteor addSubscription:@"currentUser"];
+    [self.meteor addSubscription:@"courses"];
 }
 
 - (void)didReceiveUpdate:(NSNotification *)notification {
+    [self loadSubscriptions];
     [self.tableView reloadData];
 }
 

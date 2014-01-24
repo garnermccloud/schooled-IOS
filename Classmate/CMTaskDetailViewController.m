@@ -14,25 +14,31 @@
 
 @implementation CMTaskDetailViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+
+-(void)loadSubscriptions
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
+    [super loadSubscriptions];
+    [self.meteor addSubscription:@"tasks" withParameters:@[self.course[@"_id"]]];
 }
 
-- (void)viewDidLoad
+-(void)viewWillAppear:(BOOL)animated
 {
-    [super viewDidLoad];
-	// Do any additional setup after loading the view.
+    [super viewWillAppear:YES];
+    self.navigationItem.title = [self.task[@"commits"] lastObject][@"title"];   
+    
 }
 
-- (void)didReceiveMemoryWarning
+
+#pragma mark - Meteor Collection Querying
+
+
+- (NSDictionary *) task
 {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    
+    NSPredicate *pred = [NSPredicate predicateWithFormat:@"(_id like %@)", self.taskId];
+    return [[self.meteor.collections[@"tasks"] filteredArrayUsingPredicate:pred] firstObject];
 }
+
+
 
 @end

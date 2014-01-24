@@ -18,8 +18,6 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    
-    
     self.listName = @"Available Courses";
     
     // Restore search term
@@ -28,6 +26,11 @@
         [[[self searchDisplayController] searchBar] setText:[self savedSearchTerm]];
     }
     
+}
+
+-(void)loadSubscriptions
+{
+        [super loadSubscriptions];
 }
 
 - (void)viewDidUnload

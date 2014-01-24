@@ -16,4 +16,6 @@
 
 @property (copy, nonatomic) NSString *userId;
 
+-(void)loadSubscriptions;
+
 @end
