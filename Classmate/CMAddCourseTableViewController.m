@@ -163,13 +163,14 @@ shouldReloadTableForSearchString:(NSString *)searchString
     if (course) {
         [self.meteor callMethodName:@"addCourse" parameters:@[course] responseCallback:^(NSDictionary *response, NSError *error) {
             if (error) {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Classmate - Add Course Error"
-                                                                message:[error localizedDescription]
+                id errorId = [error localizedDescription];
+                NSDictionary *errorDictionary = (NSDictionary *)errorId;
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                                message:errorDictionary[@"reason"]
                                                                delegate:nil
                                                       cancelButtonTitle:@"Try Again"
                                                       otherButtonTitles:nil];
                 [alert show];
-
             }
         }];
         [self.navigationController popViewControllerAnimated: YES];

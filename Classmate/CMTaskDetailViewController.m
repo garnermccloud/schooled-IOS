@@ -7,8 +7,13 @@
 //
 
 #import "CMTaskDetailViewController.h"
+#import "CMTaskEditViewController.h"
+
 
 @interface CMTaskDetailViewController ()
+
+@property (weak, nonatomic) IBOutlet UILabel *dueDateLabel;
+@property (weak, nonatomic) IBOutlet UITextView *NotesTextView;
 
 @end
 
@@ -24,8 +29,28 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:YES];
-    self.navigationItem.title = [self.task[@"commits"] lastObject][@"title"];   
+    [self reloadUI];
     
+}
+
+-(void)reloadUI
+{
+    self.navigationItem.title = [self.task[@"commits"] lastObject][@"title"];
+    
+    self.dueDateLabel.text = [self dueDate];
+    self.NotesTextView.text = [self.task[@"commits"] lastObject][@"notes"];
+}
+
+- (NSString *)dueDate
+{
+    double dateInSeconds = [[self.task[@"commits"] lastObject][@"dueDate"] doubleValue] / 1000;
+    NSDate *date = [NSDate dateWithTimeIntervalSince1970: dateInSeconds];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"MM/dd/yyyy"];
+    
+    return [NSString stringWithFormat:@"Due on: %@",
+            [dateFormatter  stringFromDate:date]];
+
 }
 
 
@@ -38,6 +63,23 @@
     NSPredicate *pred = [NSPredicate predicateWithFormat:@"(_id like %@)", self.taskId];
     return [[self.meteor.collections[@"tasks"] filteredArrayUsingPredicate:pred] firstObject];
 }
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+    
+    if ([segue.identifier isEqualToString:@"Edit Task"]) {
+        if ([segue.destinationViewController isKindOfClass:[CMTaskEditViewController class]]) {
+                CMTaskEditViewController * cmtevc = (CMTaskEditViewController *) segue.destinationViewController;
+                cmtevc.task = self.task;
+                cmtevc.taskId = self.taskId;
+                cmtevc.course = self.course;
+            }
+    }
+}
+
+
 
 
 

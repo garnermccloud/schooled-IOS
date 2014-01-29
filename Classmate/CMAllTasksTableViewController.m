@@ -8,6 +8,7 @@
 
 #import "CMAllTasksTableViewController.h"
 #import "CMTaskDetailViewController.h"
+#import "CMCustomTaskCell.h"
 
 @interface CMAllTasksTableViewController ()
 
@@ -18,9 +19,10 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
+    self.listName = @"Upcoming Tasks";
     
     [super viewWillAppear:YES];
-    self.listName = @"Upcoming Tasks";
+
     
     
 }
@@ -90,18 +92,21 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Task Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    CMCustomTaskCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
     // Configure the cell...
     NSDictionary *task = self.tasks[indexPath.row];
     NSDictionary *mostRecentCommit = [task[@"commits"] lastObject];
-    cell.textLabel.text = mostRecentCommit[@"title"];
+    cell.titleLabel.text = mostRecentCommit[@"title"];
     double dateInSeconds = [mostRecentCommit[@"dueDate"] doubleValue] / 1000;
     NSDate *date = [NSDate dateWithTimeIntervalSince1970: dateInSeconds];
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"MM/dd/yyyy"];
-   
-    cell.detailTextLabel.text = [dateFormatter  stringFromDate:date];
+    cell.dueDateLabel.text = [dateFormatter  stringFromDate:date];
+    NSPredicate *pred = [NSPredicate predicateWithFormat:@"(_id like %@)", task[@"courseId"]];
+    NSDictionary *course = [[self.meteor.collections[@"courses"] filteredArrayUsingPredicate:pred] firstObject];
+    cell.courseLabel.text = course[@"title"];
+    
     return cell;
 }
 

@@ -102,11 +102,17 @@ NSString * const MeteorClientTransportErrorDomain = @"boundsj.objectiveddp.trans
         }
         return;
     }
+    
+    //if (!username) {
+    //    return;
+    //}
     [self _setAuthStateToLoggingIn];
     
     if ([self _rejectIfNotConnected:responseCallback]) {
         return;
     }
+    
+
     
     if (!userParameters) {
         userParameters = @{@"user": @{@"email": username}};

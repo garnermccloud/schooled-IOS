@@ -16,15 +16,30 @@
 
 
 
-@property (weak, nonatomic) IBOutlet UITextField *username;
-@property (weak, nonatomic) IBOutlet UITextField *password;
+@property (weak, nonatomic) IBOutlet UITextField *loginEmail;
+@property (weak, nonatomic) IBOutlet UITextField *loginPassword;
+
+@property (weak, nonatomic) IBOutlet UITextField *createEmail;
+@property (weak, nonatomic) IBOutlet UITextField *confirmEmail;
+@property (weak, nonatomic) IBOutlet UITextField *createPassword;
+@property (weak, nonatomic) IBOutlet UITextField *confirmPassword;
+
+
 @property (weak, nonatomic) IBOutlet UILabel *connectionStatusText;
 @property (weak, nonatomic) IBOutlet UIImageView *connectionStatusLight;
 @property (weak, nonatomic) IBOutlet UIButton *loginButton;
+@property (weak, nonatomic) IBOutlet UIButton *createAccountButton;
+
+@property (weak, nonatomic) IBOutlet UIButton *goToLoginButton;
+@property (weak, nonatomic) IBOutlet UIButton *goToSignUpButton;
+
 @property (strong, nonatomic) MeteorClient *meteor;
-@property (weak, nonatomic) IBOutlet UIButton *sayHiButton;
 
 - (IBAction)didTapLoginButton:(id)sender;
+- (IBAction)didTapSignUpNowButton:(id)sender;
+- (IBAction)didTapCreateAccountButton:(id)sender;
+- (IBAction)didTapGoToLoginButton:(id)sender;
+
 
 
 @end

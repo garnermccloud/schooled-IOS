@@ -7,6 +7,8 @@
 //
 
 #import "CMCourseTasksTableViewController.h"
+#import "CMTaskDetailViewController.h"
+#import "CMTaskAddViewController.h"
 
 @interface CMCourseTasksTableViewController ()
 
@@ -18,13 +20,15 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
-        [super viewWillAppear:YES];
     self.listName = self.course[@"title"];
+    [super viewWillAppear:YES];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(pressedAdd)];
+
 }
 
 -(void)loadSubscriptions
 {
-        [super loadSubscriptions];
+    [super loadSubscriptions];
     [self.meteor addSubscription:@"tasks" withParameters:@[self.course[@"_id"]]];
 }
 
@@ -86,6 +90,39 @@
     [dateFormatter setDateFormat:@"MM/dd/yyyy"];
     cell.detailTextLabel.text = [dateFormatter  stringFromDate:date];
     return cell;
+}
+
+-(void)pressedAdd
+{
+    [self performSegueWithIdentifier:@"Add Task" sender:self];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+    
+    if ([sender isKindOfClass:[UITableViewCell class]]) {
+        
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
+        if (indexPath) {
+            if ([segue.identifier isEqualToString:@"Select Task"]) {
+                if ([segue.destinationViewController isKindOfClass:[CMTaskDetailViewController class]]) {
+                    CMTaskDetailViewController * cmtdvc = (CMTaskDetailViewController *) segue.destinationViewController;
+                    NSDictionary *task = self.tasks[indexPath.row];
+                    cmtdvc.taskId = task[@"_id"];
+                    cmtdvc.course = self.course;
+                }
+            }
+        }
+    }
+    else if ([segue.identifier isEqualToString:@"Add Task"])
+              {
+                  if ([segue.destinationViewController isKindOfClass:[CMTaskAddViewController class]]) {
+                      CMTaskAddViewController *cmtavc = (CMTaskAddViewController *) segue.destinationViewController;
+                      cmtavc.course = self.course;
+                  }
+              }
 }
 
 

@@ -8,6 +8,7 @@
 
 #import "CMCoursesTableViewController.h"
 #import "CMCourseTasksTableViewController.h"
+#import "CMAddCourseTableViewController.h"
 #import <ObjectiveDDP/MeteorClient.h>
 
 
@@ -22,9 +23,11 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    self.listName = @"My Courses";
     [super viewWillAppear:YES];
     self.navigationItem.leftBarButtonItem = self.editButtonItem;
-    self.listName = @"My Courses";
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(pressedAdd)];
+
 
 }
 
@@ -72,6 +75,11 @@
     NSDictionary *course = self.courses[indexPath.row];
     cell.textLabel.text = course[@"title"];
     return cell;
+}
+
+-(void)pressedAdd
+{
+    [self performSegueWithIdentifier:@"Add Course" sender:self];
 }
 
 // In a story board-based application, you will often want to do a little preparation before navigation
