@@ -41,6 +41,10 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
+    NSLog(@"userId = %@", self.meteor.userId);
+    if (!self.meteor.userId) {
+        [self performSegueWithIdentifier:@"Login" sender:self];
+    }
     self.navigationItem.title = self.listName;
     [self loadSubscriptions];
     [self.tableView reloadData];

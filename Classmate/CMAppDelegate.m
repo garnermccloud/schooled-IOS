@@ -21,7 +21,7 @@
     [self.meteorClient addSubscription:@"courses"];
     [self.meteorClient addSubscription:@"currentUser"];
 
-    ObjectiveDDP *ddp = [[ObjectiveDDP alloc] initWithURLString:@"wss://classmate.meteor.com/websocket" delegate:self.meteorClient];
+    ObjectiveDDP *ddp = [[ObjectiveDDP alloc] initWithURLString:@"wss://classmate-s.herokuapp.com/websocket" delegate:self.meteorClient];
 
     
     self.meteorClient.ddp = ddp;

@@ -30,6 +30,7 @@
 		D496B1A518985A0E0081E625 /* CMCreateAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D496B1A418985A0E0081E625 /* CMCreateAccountViewController.m */; };
 		D496B1AA189868040081E625 /* CMCreateAccountView.m in Sources */ = {isa = PBXBuildFile; fileRef = D496B1A9189868040081E625 /* CMCreateAccountView.m */; };
 		D496B1AD189868950081E625 /* CMLoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = D496B1AC189868950081E625 /* CMLoginView.m */; };
+		D496B1B0189996F30081E625 /* CMMyAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D496B1AF189996F30081E625 /* CMMyAccountViewController.m */; };
 		D4976CA1189366E500871B2F /* CMCustomTaskCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D4976CA0189366E500871B2F /* CMCustomTaskCell.m */; };
 		D498CEB1188F9C360070BBB9 /* CMLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D498CEB0188F9C360070BBB9 /* CMLoginViewController.m */; };
 		D498CEB4188FA2540070BBB9 /* CMTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D498CEB3188FA2540070BBB9 /* CMTableViewController.m */; };
@@ -86,6 +87,8 @@
 		D496B1A9189868040081E625 /* CMCreateAccountView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMCreateAccountView.m; sourceTree = "<group>"; };
 		D496B1AB189868950081E625 /* CMLoginView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMLoginView.h; sourceTree = "<group>"; };
 		D496B1AC189868950081E625 /* CMLoginView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMLoginView.m; sourceTree = "<group>"; };
+		D496B1AE189996F30081E625 /* CMMyAccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMMyAccountViewController.h; sourceTree = "<group>"; };
+		D496B1AF189996F30081E625 /* CMMyAccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMMyAccountViewController.m; sourceTree = "<group>"; };
 		D4976C9F189366E500871B2F /* CMCustomTaskCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMCustomTaskCell.h; sourceTree = "<group>"; };
 		D4976CA0189366E500871B2F /* CMCustomTaskCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMCustomTaskCell.m; sourceTree = "<group>"; };
 		D498CEAF188F9C360070BBB9 /* CMLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMLoginViewController.h; sourceTree = "<group>"; };
@@ -237,6 +240,8 @@
 		D498CEC31891BE1F0070BBB9 /* Actual */ = {
 			isa = PBXGroup;
 			children = (
+				D496B1AE189996F30081E625 /* CMMyAccountViewController.h */,
+				D496B1AF189996F30081E625 /* CMMyAccountViewController.m */,
 				D496B1AB189868950081E625 /* CMLoginView.h */,
 				D496B1AC189868950081E625 /* CMLoginView.m */,
 				D496B1A8189868040081E625 /* CMCreateAccountView.h */,
@@ -419,6 +424,7 @@
 				D4976CA1189366E500871B2F /* CMCustomTaskCell.m in Sources */,
 				D41AD81A188F7BBB0057A22B /* CMAppDelegate.m in Sources */,
 				D498CEB4188FA2540070BBB9 /* CMTableViewController.m in Sources */,
+				D496B1B0189996F30081E625 /* CMMyAccountViewController.m in Sources */,
 				D496B1A21896C3640081E625 /* CMTaskAddViewController.m in Sources */,
 				D41AD816188F7BBB0057A22B /* main.m in Sources */,
 				D498CEB7188FA2850070BBB9 /* CMCoursesTableViewController.m in Sources */,

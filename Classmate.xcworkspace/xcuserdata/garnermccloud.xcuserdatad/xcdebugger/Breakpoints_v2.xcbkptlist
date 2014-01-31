@@ -9,13 +9,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Classmate/CMLoginViewController.m"
-            timestampString = "412674358.694812"
+            filePath = "Pods/ObjectiveDDP/ObjectiveDDP/MeteorClient.m"
+            timestampString = "412720868.655361"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "166"
-            endingLineNumber = "166"
-            landmarkName = "-didTapCreateAccountButton:"
+            startingLineNumber = "98"
+            endingLineNumber = "98"
+            landmarkName = "-logonWithUserParameters:username:password:responseCallback:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

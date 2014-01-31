@@ -19,14 +19,22 @@
 
 @implementation CMCoursesTableViewController
 
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    [self.editButtonItem setImage:[UIImage imageNamed:@"trash"]];
+    self.editButtonItem.title = nil;
+    self.navigationItem.leftBarButtonItem = self.editButtonItem;
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(pressedAdd)];
+    
+}
 
 
 - (void)viewWillAppear:(BOOL)animated
 {
     self.listName = @"My Courses";
     [super viewWillAppear:YES];
-    self.navigationItem.leftBarButtonItem = self.editButtonItem;
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(pressedAdd)];
+   
 
 
 }
@@ -50,7 +58,30 @@
     return [[self.meteor.collections[@"courses"] filteredArrayUsingPredicate:pred] sortedArrayUsingDescriptors:@[sort]];
 }
 
+
+
 #pragma mark - Table view data source
+
+-(void)setEditing:(BOOL)editing animated:(BOOL)animated {
+    
+    [super setEditing:editing animated:animated];
+    
+    if(editing) {
+        //Do something for edit mode
+        [self.editButtonItem setImage:nil];
+    }
+    
+    else {
+        self.editButtonItem.title = nil;
+        [self.editButtonItem setImage:[UIImage imageNamed:@"trash"]];
+        //Do something for non-edit mode
+    }
+    
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return @"Remove";
+}
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -103,6 +134,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    
     // If row is deleted, remove it from the list.
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         NSDictionary *course = self.courses[indexPath.row];

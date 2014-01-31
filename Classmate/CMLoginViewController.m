@@ -44,10 +44,12 @@
 
 
 - (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:YES];
     [self.meteor addObserver:self
                   forKeyPath:@"websocketReady"
                      options:NSKeyValueObservingOptionNew
                      context:nil];
+    
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -78,6 +80,7 @@
         [notConnectedAlert show];
         return;
     }
+    NSLog(@"tapped login button");
     
     [self.meteor logonWithUsername:self.loginEmail.text password:self.loginPassword.text responseCallback:^(NSDictionary *response, NSError *error) {
         if (error) {
