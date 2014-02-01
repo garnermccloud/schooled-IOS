@@ -14,4 +14,8 @@
 
 @property (nonatomic, strong) NSArray *tasks;
 
+@property (weak, nonatomic) IBOutlet UIButton *goToRemovedTasksButton;
+
+-(IBAction)pressedGoToRemovedTasks:(id)sender;
+
 @end

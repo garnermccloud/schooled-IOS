@@ -12,17 +12,26 @@
 
 @interface CMCourseTasksTableViewController ()
 
+@property BOOL showRemovedTasks;
+
 @end
 
 @implementation CMCourseTasksTableViewController
 
 
+-(void)viewDidLoad
+{
+    [super viewDidLoad];
+}
+
 
 -(void)viewWillAppear:(BOOL)animated
 {
+    self.showRemovedTasks = false;
     self.listName = self.course[@"title"];
+    [self.goToRemovedTasksButton setTitle:@"Go To Removed Tasks" forState: UIControlStateNormal];
     [super viewWillAppear:YES];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(pressedAdd)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCompose target:self action:@selector(pressedAdd)];
 
 }
 
@@ -38,8 +47,14 @@
 
 - (NSArray *)tasks
 {
-    
-    NSPredicate *pred = [NSPredicate predicateWithFormat:@"(courseId like %@)", self.course[@"_id"]];
+    NSPredicate *pred = [[NSPredicate alloc] init];
+    if (self.showRemovedTasks) {
+        NSPredicate *predNormal = [NSPredicate predicateWithFormat:@"(courseId like %@) AND (valid == 0)", self.course[@"_id"], NO];
+        pred = predNormal;
+    } else {
+        NSPredicate *predRemoved = [NSPredicate predicateWithFormat:@"(courseId like %@) AND (valid == 1)", self.course[@"_id"], YES];
+        pred = predRemoved;
+    }
     NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"commits" ascending:YES comparator:^NSComparisonResult(id obj1, id obj2) {
         id mostRecentCommit1 = [obj1 lastObject];
         id mostRecentCommit2 = [obj2 lastObject];
@@ -60,6 +75,16 @@
 }
 
 #pragma mark - Table view data source
+
+- (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (!self.showRemovedTasks) {
+        return @"Remove";
+    }
+    else {
+        return @"Add Back";
+    }
+}
+
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -92,9 +117,25 @@
     return cell;
 }
 
+
 -(void)pressedAdd
 {
     [self performSegueWithIdentifier:@"Add Task" sender:self];
+}
+
+-(IBAction)pressedGoToRemovedTasks:(id)sender
+{
+    self.showRemovedTasks = !self.showRemovedTasks;
+    
+    if (self.showRemovedTasks) {
+         self.navigationItem.title = [NSString stringWithFormat:@" %@'s Removed", self.course[@"title"]];
+        [self.goToRemovedTasksButton setTitle:@"Back to Current Tasks" forState: UIControlStateNormal];
+        }
+    else {
+        self.navigationItem.title = [NSString stringWithFormat:@" %@", self.course[@"title"]];
+        [self.goToRemovedTasksButton setTitle:@"Go To Removed Tasks" forState: UIControlStateNormal];
+    }
+    [self.tableView reloadData];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -117,13 +158,52 @@
         }
     }
     else if ([segue.identifier isEqualToString:@"Add Task"])
-              {
-                  if ([segue.destinationViewController isKindOfClass:[CMTaskAddViewController class]]) {
+        {
+            if ([segue.destinationViewController isKindOfClass:[CMTaskAddViewController class]]) {
                       CMTaskAddViewController *cmtavc = (CMTaskAddViewController *) segue.destinationViewController;
                       cmtavc.course = self.course;
-                  }
-              }
+            }
+        }
 }
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    // If row is deleted, remove it from the list.
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        
+        NSDictionary *task = self.tasks[indexPath.row];
+        if (!self.showRemovedTasks) {
+            if (task) {
+                [self.meteor callMethodName:@"invalidateTask"   parameters:@[task[@"_id"]] responseCallback:^(NSDictionary *response, NSError *error) {
+                    if (error) {
+                        NSLog(@"Error = %@", error);
+                        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Classmate - Remove Task Error"
+                                                                    message:[error localizedDescription]
+                                                                   delegate:nil
+                                                          cancelButtonTitle:@"Try Again"
+                                                          otherButtonTitles:nil];
+                        [alert show];
+                    }
+                }];
+            }
+        } else
+            if (task) {
+                [self.meteor callMethodName:@"validateTask"   parameters:@[task[@"_id"]] responseCallback:^(NSDictionary *response, NSError *error) {
+                    if (error) {
+                        NSLog(@"Error = %@", error);
+                        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Classmate - Add Task Back Error"
+                                                                        message:[error localizedDescription]
+                                                                       delegate:nil
+                                                              cancelButtonTitle:@"Try Again"
+                                                              otherButtonTitles:nil];
+                        [alert show];
+                    }
+                }];
+            }
+        
+    }
+}
+
 
 
 

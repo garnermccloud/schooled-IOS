@@ -53,7 +53,7 @@
 - (NSArray *)tasks
 {
     
-    NSPredicate *pred = [NSPredicate predicateWithFormat:@"(courseId IN %@)", self.currentUser[@"courses"]];
+    NSPredicate *pred = [NSPredicate predicateWithFormat:@"(courseId IN %@) AND (valid == 1)", self.currentUser[@"courses"]];
     NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"commits" ascending:YES comparator:^NSComparisonResult(id obj1, id obj2) {
         id mostRecentCommit1 = [obj1 lastObject];
         id mostRecentCommit2 = [obj2 lastObject];

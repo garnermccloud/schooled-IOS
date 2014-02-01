@@ -102,18 +102,11 @@ NSString * const MeteorClientTransportErrorDomain = @"boundsj.objectiveddp.trans
         }
         return;
     }
-    
-    if (!username) {
-        [self _setAuthStatetoLoggedOut];
-        return;
-    }
     [self _setAuthStateToLoggingIn];
     
     if ([self _rejectIfNotConnected:responseCallback]) {
         return;
     }
-    
-
     
     if (!userParameters) {
         userParameters = @{@"user": @{@"email": username}};
@@ -134,7 +127,6 @@ NSString * const MeteorClientTransportErrorDomain = @"boundsj.objectiveddp.trans
                     method:@"logout"
                 parameters:nil];
     [self _setAuthStatetoLoggedOut];
-    self.userId = nil;
 }
 
 - (void)disconnect {
@@ -269,6 +261,7 @@ NSString * const MeteorClientTransportErrorDomain = @"boundsj.objectiveddp.trans
 }
 
 - (void)_setAuthStatetoLoggedOut {
+    _logonParams = nil;
     self.authState = AuthStateLoggedOut;
 }
 

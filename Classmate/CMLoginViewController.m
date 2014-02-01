@@ -11,6 +11,7 @@
 #import <ObjectiveDDP/ObjectiveDDP.h>
 #import <ObjectiveDDP/MeteorClient.h>
 #import "CMCoursesTableViewController.h"
+#import <UICKeyChainStore.h>
 
 
 
@@ -49,6 +50,11 @@
                   forKeyPath:@"websocketReady"
                      options:NSKeyValueObservingOptionNew
                      context:nil];
+    if ([UICKeyChainStore stringForKey:@"email"] ) {
+        [self.rememberEmailSwitch setOn:YES];
+        self.loginEmail.text = [UICKeyChainStore stringForKey:@"email"];
+    }
+    
     
 }
 
@@ -71,6 +77,12 @@
 
 #pragma mark UI Actions
 - (IBAction)didTapLoginButton:(id)sender {
+    if (self.rememberEmailSwitch.on) {
+        [UICKeyChainStore setString:self.loginEmail.text forKey:@"email"];
+    } else {
+        [UICKeyChainStore removeItemForKey:@"email"];
+    }
+    
     if (!self.meteor.websocketReady) {
         UIAlertView *notConnectedAlert = [[UIAlertView alloc] initWithTitle:@"Connection Error"
                                                                     message:@"Can't find the Classmate server, try again"

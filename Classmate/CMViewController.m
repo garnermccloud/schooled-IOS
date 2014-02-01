@@ -33,7 +33,8 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     NSLog(@"userId = %@", self.meteor.userId);
-    if (!self.meteor.userId) {
+    NSLog(@"authState = %u", self.meteor.authState);
+    if (self.meteor.authState == 3) {
         [self performSegueWithIdentifier:@"Login" sender:self];
     }
     self.navigationItem.title = nil;
