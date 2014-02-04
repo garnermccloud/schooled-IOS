@@ -33,7 +33,9 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     self.listName = @"My Courses";
-    [super viewWillAppear:YES];
+    [super viewWillAppear:NO];
+    
+    [self.tableView reloadData];
    
 
 

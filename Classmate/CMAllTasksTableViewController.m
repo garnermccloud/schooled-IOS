@@ -21,9 +21,14 @@
 {
     self.listName = @"Upcoming Tasks";
     
-    [super viewWillAppear:YES];
-
+    [super viewWillAppear:NO];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(didReceiveUpdate:)
+                                                 name:@"tasks_ready"
+                                               object:nil];
+    [self.tableView reloadData];
+
     
 }
 
@@ -33,9 +38,9 @@
 -(void)loadSubscriptions
 {
         [super loadSubscriptions];
-    for (NSDictionary *course in self.courses) {
-        [self.meteor addSubscription:@"tasks" withParameters:@[course[@"_id"]]];
-    }
+   // for (NSDictionary *course in self.courses) {
+   //     [self.meteor addSubscription:@"tasks" withParameters:@[course[@"_id"]]];
+   // }
 
 }
 
@@ -52,8 +57,16 @@
 
 - (NSArray *)tasks
 {
-    
-    NSPredicate *pred = [NSPredicate predicateWithFormat:@"(courseId IN %@) AND (valid == 1)", self.currentUser[@"courses"]];
+    NSPredicate *pred = [NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
+        NSDictionary *task = evaluatedObject;
+        id valid= [task[@"commits"] lastObject][@"valid"];
+        NSNumber *validNumber = (NSNumber *) valid;
+        if ([self.currentUser[@"courses"] containsObject:task[@"courseId"]] && [validNumber isEqual: @(YES)]) {
+            return YES;
+        } else {
+            return NO;
+        }
+    }];
     NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"commits" ascending:YES comparator:^NSComparisonResult(id obj1, id obj2) {
         id mostRecentCommit1 = [obj1 lastObject];
         id mostRecentCommit2 = [obj2 lastObject];

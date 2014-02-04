@@ -40,6 +40,8 @@
 - (IBAction)didTapSignUpNowButton:(id)sender;
 - (IBAction)didTapCreateAccountButton:(id)sender;
 - (IBAction)didTapGoToLoginButton:(id)sender;
+- (IBAction)didTapSplashLoginButton:(id)sender;
+- (IBAction)didTapSplashSignUpButton:(id)sender;
 
 
 

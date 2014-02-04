@@ -14,6 +14,7 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *dueDateLabel;
 @property (weak, nonatomic) IBOutlet UITextView *NotesTextView;
+@property (weak, nonatomic) IBOutlet UILabel *editedByLabel;
 
 @end
 
@@ -23,12 +24,17 @@
 -(void)loadSubscriptions
 {
     [super loadSubscriptions];
-    [self.meteor addSubscription:@"tasks" withParameters:@[self.course[@"_id"]]];
+  //  [self.meteor addSubscription:@"tasks" withParameters:@[self.course[@"_id"]]];
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:YES];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(didReceiveUpdate:)
+                                                 name:@"tasks_ready"
+                                               object:nil];
+    
     [self reloadUI];
     
 }
@@ -39,6 +45,7 @@
     
     self.dueDateLabel.text = [self dueDate];
     self.NotesTextView.text = [self.task[@"commits"] lastObject][@"notes"];
+    self.editedByLabel.text = [NSString stringWithFormat:@"Last Edited By: %@", [self.task[@"commits"] lastObject][@"email"]];
 }
 
 - (NSString *)dueDate

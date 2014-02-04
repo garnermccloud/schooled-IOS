@@ -18,4 +18,8 @@
 
 -(void)loadSubscriptions;
 
+- (void)didReceiveUpdate:(NSNotification *)notification;
+
+- (void)reloadUI;
+
 @end

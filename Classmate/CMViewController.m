@@ -32,31 +32,52 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
-    NSLog(@"userId = %@", self.meteor.userId);
-    NSLog(@"authState = %u", self.meteor.authState);
     if (self.meteor.authState == 3) {
         [self performSegueWithIdentifier:@"Login" sender:self];
     }
+    NSLog(@"Meteor Client = %@", self.meteor);
     self.navigationItem.title = nil;
     [self loadSubscriptions];
     [self reloadUI];
     
+     
+     [[NSNotificationCenter defaultCenter] addObserver:self
+     selector:@selector(didReceiveUpdate:)
+     name:@"tasks_added"
+     object:nil];
+     [[NSNotificationCenter defaultCenter] addObserver:self
+     selector:@selector(didReceiveUpdate:)
+     name:@"tasks_removed"
+     object:nil];
+     [[NSNotificationCenter defaultCenter] addObserver:self
+     selector:@selector(didReceiveUpdate:)
+     name:@"tasks_changed"
+     object:nil];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(didReceiveUpdate:)
-                                                 name:@"added"
+                                                 name:@"users_added"
                                                object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(didReceiveUpdate:)
-                                                 name:@"removed"
+                                                 name:@"users_removed"
                                                object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(didReceiveUpdate:)
-                                                 name:@"changed"
+                                                 name:@"users_changed"
                                                object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(didReceiveUpdate:)
                                                  name:MeteorClientDidConnectNotification
                                                object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(applicationDidBecomeActive:)
+                                                 name:UIApplicationDidBecomeActiveNotification object:nil];
+}
+
+- (void)applicationDidBecomeActive:(NSNotification *)notification {
+    
+    [self reloadUI];
 }
 
 
@@ -67,12 +88,12 @@
 }
 
 - (void)loadSubscriptions {
-    [self.meteor addSubscription:@"currentUser"];
-    [self.meteor addSubscription:@"courses"];
+  //  [self.meteor addSubscription:@"currentUser"];
+  //  [self.meteor addSubscription:@"courses"];
 }
 
 - (void)didReceiveUpdate:(NSNotification *)notification {
-    [self loadSubscriptions];
+    //[self loadSubscriptions];
     [self reloadUI];
 }
 

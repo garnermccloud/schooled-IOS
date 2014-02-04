@@ -18,8 +18,9 @@
 
     
     self.meteorClient = [[MeteorClient alloc] init];
-    [self.meteorClient addSubscription:@"courses"];
     [self.meteorClient addSubscription:@"currentUser"];
+    [self.meteorClient addSubscription:@"courses"];
+    [self.meteorClient addSubscription:@"tasks"];
 
     ObjectiveDDP *ddp = [[ObjectiveDDP alloc] initWithURLString:@"wss://classmate.meteor.com/websocket" delegate:self.meteorClient];
 

@@ -28,6 +28,12 @@
     
 }
 
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:NO];
+    [self.tableView reloadData];
+}
+
 -(void)loadSubscriptions
 {
         [super loadSubscriptions];
@@ -82,6 +88,7 @@ shouldReloadTableForSearchString:(NSString *)searchString
     [self setSavedSearchTerm:nil];
     
     [self.tableView reloadData];
+    
 }
 
 
@@ -163,14 +170,24 @@ shouldReloadTableForSearchString:(NSString *)searchString
     if (course) {
         [self.meteor callMethodName:@"addCourse" parameters:@[course] responseCallback:^(NSDictionary *response, NSError *error) {
             if (error) {
-                id errorId = [error localizedDescription];
-                NSDictionary *errorDictionary = (NSDictionary *)errorId;
+                NSString *errorMessage;
+                if ([[error localizedDescription] isKindOfClass:[NSString class]])
+                {
+                    errorMessage = [error localizedDescription];
+                } else {
+                    id errorId = [error localizedDescription];
+                    NSDictionary *errorDictionary = (NSDictionary *)errorId;
+                    errorMessage = errorDictionary[@"reason"];
+                }
+                NSLog(@"Error = %@", error);
+                //NSDictionary *errorDictionary = (NSDictionary *)errorId;
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
-                                                                message:errorDictionary[@"reason"]
+                                                                message:errorMessage
                                                                delegate:nil
                                                       cancelButtonTitle:@"Try Again"
                                                       otherButtonTitles:nil];
                 [alert show];
+                
             }
         }];
         [self.navigationController popViewControllerAnimated: YES];

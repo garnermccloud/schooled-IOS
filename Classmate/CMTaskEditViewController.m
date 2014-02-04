@@ -25,7 +25,7 @@
 -(void)loadSubscriptions
 {
     [super loadSubscriptions];
-    [self.meteor addSubscription:@"tasks" withParameters:@[self.course[@"_id"]]];
+  //  [self.meteor addSubscription:@"tasks" withParameters:@[self.course[@"_id"]]];
 }
 
 - (void)viewDidLoad
@@ -46,6 +46,11 @@ tapScroll.cancelsTouchesInView = NO;
 {
     [super viewWillAppear:YES];
     [self reloadUI];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(didReceiveUpdate:)
+                                                 name:@"tasks_ready"
+                                               object:nil];
     
 }
 
@@ -91,10 +96,19 @@ tapScroll.cancelsTouchesInView = NO;
 
         [self.meteor callMethodName:@"updateTask" parameters:@[task] responseCallback:^(NSDictionary *response, NSError *error) {
             if (error) {
-                id errorId = [error localizedDescription];
-                NSDictionary *errorDictionary = (NSDictionary *)errorId;
+                NSString *errorMessage;
+                if ([[error localizedDescription] isKindOfClass:[NSString class]])
+                {
+                    errorMessage = [error localizedDescription];
+                } else {
+                    id errorId = [error localizedDescription];
+                    NSDictionary *errorDictionary = (NSDictionary *)errorId;
+                    errorMessage = errorDictionary[@"reason"];
+                }
+                NSLog(@"Error = %@", error);
+                //NSDictionary *errorDictionary = (NSDictionary *)errorId;
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
-                                                                message:errorDictionary[@"reason"]
+                                                                message:errorMessage
                                                                delegate:nil
                                                       cancelButtonTitle:@"Try Again"
                                                       otherButtonTitles:nil];

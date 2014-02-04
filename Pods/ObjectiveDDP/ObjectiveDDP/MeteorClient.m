@@ -167,6 +167,7 @@ NSString * const MeteorClientTransportErrorDomain = @"boundsj.objectiveddp.trans
                 NSString *curSubId = _subscriptions[subscriptionName];
                 if([curSubId isEqualToString:readySubscription]) {
                     NSString *notificationName = [NSString stringWithFormat:@"%@_ready", subscriptionName];
+                    NSLog(@"%@_ready", subscriptionName);
                     [[NSNotificationCenter defaultCenter] postNotificationName:notificationName object:self];
                     break;
                 }

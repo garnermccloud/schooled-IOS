@@ -43,6 +43,11 @@
     [super viewWillAppear:YES];
     [self reloadUI];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(didReceiveUpdate:)
+                                                 name:@"tasks_ready"
+                                               object:nil];
+    
 }
 
 -(void)reloadUI
@@ -69,14 +74,24 @@
     
     [self.meteor callMethodName:@"addTask" parameters:@[task] responseCallback:^(NSDictionary *response, NSError *error) {
         if (error) {
-            id errorId = [error localizedDescription];
-            NSDictionary *errorDictionary = (NSDictionary *)errorId;
+            NSString *errorMessage;
+            if ([[error localizedDescription] isKindOfClass:[NSString class]])
+            {
+                errorMessage = [error localizedDescription];
+            } else {
+                id errorId = [error localizedDescription];
+                NSDictionary *errorDictionary = (NSDictionary *)errorId;
+                errorMessage = errorDictionary[@"reason"];
+            }
+            NSLog(@"Error = %@", error);
+            //NSDictionary *errorDictionary = (NSDictionary *)errorId;
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
-                                                            message:errorDictionary[@"reason"]
+                                                            message:errorMessage
                                                            delegate:nil
                                                   cancelButtonTitle:@"Try Again"
                                                   otherButtonTitles:nil];
             [alert show];
+            
         }
         else {
             [self.navigationController popViewControllerAnimated: YES];

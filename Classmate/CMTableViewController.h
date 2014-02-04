@@ -19,4 +19,6 @@
 
 -(void)loadSubscriptions;
 
+- (void)didReceiveUpdate:(NSNotification *)notification;
+
 @end

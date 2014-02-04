@@ -115,12 +115,26 @@
 }
 
 - (void)handleFailedAuth:(NSError *)error {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Classmate"
-                                                    message:[error localizedDescription]
-                                                   delegate:nil
-                                          cancelButtonTitle:@"Try Again"
-                                          otherButtonTitles:nil];
-    [alert show];
+    if (error) {
+        NSString *errorMessage;
+        if ([[error localizedDescription] isKindOfClass:[NSString class]])
+        {
+            errorMessage = [error localizedDescription];
+        } else {
+            id errorId = [error localizedDescription];
+            NSDictionary *errorDictionary = (NSDictionary *)errorId;
+            errorMessage = errorDictionary[@"reason"];
+        }
+        NSLog(@"Error = %@", error);
+        //NSDictionary *errorDictionary = (NSDictionary *)errorId;
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                        message:errorMessage
+                                                       delegate:nil
+                                              cancelButtonTitle:@"Try Again"
+                                              otherButtonTitles:nil];
+        [alert show];
+        
+    }
 }
 
 

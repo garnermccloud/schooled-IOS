@@ -30,15 +30,22 @@
     self.showRemovedTasks = false;
     self.listName = self.course[@"title"];
     [self.goToRemovedTasksButton setTitle:@"Go To Removed Tasks" forState: UIControlStateNormal];
-    [super viewWillAppear:YES];
+    [super viewWillAppear:NO];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(didReceiveUpdate:)
+                                                 name:@"tasks_ready"
+                                               object:nil];
+    
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCompose target:self action:@selector(pressedAdd)];
 
+    [self.tableView reloadData];
 }
 
 -(void)loadSubscriptions
 {
     [super loadSubscriptions];
-    [self.meteor addSubscription:@"tasks" withParameters:@[self.course[@"_id"]]];
+  //  [self.meteor addSubscription:@"tasks" withParameters:@[self.course[@"_id"]]];
 }
 
 
@@ -49,10 +56,29 @@
 {
     NSPredicate *pred = [[NSPredicate alloc] init];
     if (self.showRemovedTasks) {
-        NSPredicate *predNormal = [NSPredicate predicateWithFormat:@"(courseId like %@) AND (valid == 0)", self.course[@"_id"], NO];
+        NSPredicate *predNormal = [NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
+            NSDictionary *task = evaluatedObject;
+            id valid= [task[@"commits"] lastObject][@"valid"];
+            NSNumber *validNumber = (NSNumber *) valid;
+            if ([task[@"courseId"] isEqualToString:self.course[@"_id"]] && [validNumber  isEqual: @(NO)]) {
+                return YES;
+            } else {
+                return NO;
+            }
+        }];
         pred = predNormal;
     } else {
-        NSPredicate *predRemoved = [NSPredicate predicateWithFormat:@"(courseId like %@) AND (valid == 1)", self.course[@"_id"], YES];
+        NSPredicate *predRemoved = [NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
+            NSDictionary *task = evaluatedObject;
+            id valid= [task[@"commits"] lastObject][@"valid"];
+            NSNumber *validNumber = (NSNumber *) valid;
+            if ([task[@"courseId"] isEqualToString:self.course[@"_id"]] && [validNumber  isEqual: @(YES)]) {
+                return YES;
+            } else {
+                return NO;
+            }
+            
+        }];
         pred = predRemoved;
     }
     NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"commits" ascending:YES comparator:^NSComparisonResult(id obj1, id obj2) {

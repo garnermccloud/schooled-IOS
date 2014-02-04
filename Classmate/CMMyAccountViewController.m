@@ -20,8 +20,7 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
-    [super viewWillAppear:YES];
-    NSLog(@"currentUser = %@", self.currentUser);
+    [super viewWillAppear:NO];
     
     self.emailLabel.text = [self.currentUser[@"emails"] firstObject][@"address"];
     
