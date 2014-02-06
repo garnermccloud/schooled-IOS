@@ -56,21 +56,21 @@
 
 /* Begin PBXFileReference section */
 		38C3A3C9FDDF4B2EBD541A89 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		D41AD806188F7BBB0057A22B /* Classmate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Classmate.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D41AD806188F7BBB0057A22B /* Collegemate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Collegemate.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D41AD809188F7BBB0057A22B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D41AD80B188F7BBB0057A22B /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		D41AD80D188F7BBB0057A22B /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		D41AD811188F7BBB0057A22B /* Classmate-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Classmate-Info.plist"; sourceTree = "<group>"; };
+		D41AD811188F7BBB0057A22B /* Collegemate-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Collegemate-Info.plist"; sourceTree = "<group>"; };
 		D41AD813188F7BBB0057A22B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		D41AD815188F7BBB0057A22B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		D41AD817188F7BBB0057A22B /* Classmate-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Classmate-Prefix.pch"; sourceTree = "<group>"; };
+		D41AD817188F7BBB0057A22B /* Collegemate-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Collegemate-Prefix.pch"; sourceTree = "<group>"; };
 		D41AD818188F7BBB0057A22B /* CMAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CMAppDelegate.h; sourceTree = "<group>"; };
 		D41AD819188F7BBB0057A22B /* CMAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CMAppDelegate.m; sourceTree = "<group>"; };
 		D41AD81C188F7BBB0057A22B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D41AD821188F7BBB0057A22B /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		D41AD827188F7BBB0057A22B /* ClassmateTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ClassmateTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D41AD827188F7BBB0057A22B /* CollegemateTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CollegemateTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D41AD828188F7BBB0057A22B /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		D41AD830188F7BBC0057A22B /* ClassmateTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ClassmateTests-Info.plist"; sourceTree = "<group>"; };
+		D41AD830188F7BBC0057A22B /* CollegemateTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CollegemateTests-Info.plist"; sourceTree = "<group>"; };
 		D41AD832188F7BBC0057A22B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		D41AD834188F7BBC0057A22B /* ClassmateTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ClassmateTests.m; sourceTree = "<group>"; };
 		D41AD83E188F7F0E0057A22B /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
@@ -140,8 +140,8 @@
 		D41AD7FD188F7BBB0057A22B = {
 			isa = PBXGroup;
 			children = (
-				D41AD80F188F7BBB0057A22B /* Classmate */,
-				D41AD82E188F7BBC0057A22B /* ClassmateTests */,
+				D41AD80F188F7BBB0057A22B /* Collegemate */,
+				D41AD82E188F7BBC0057A22B /* CollegemateTests */,
 				D41AD808188F7BBB0057A22B /* Frameworks */,
 				D41AD807188F7BBB0057A22B /* Products */,
 				DE7DF81E19EB45E9A2F9EDB2 /* Pods.xcconfig */,
@@ -151,8 +151,8 @@
 		D41AD807188F7BBB0057A22B /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				D41AD806188F7BBB0057A22B /* Classmate.app */,
-				D41AD827188F7BBB0057A22B /* ClassmateTests.xctest */,
+				D41AD806188F7BBB0057A22B /* Collegemate.app */,
+				D41AD827188F7BBB0057A22B /* CollegemateTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -169,7 +169,7 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		D41AD80F188F7BBB0057A22B /* Classmate */ = {
+		D41AD80F188F7BBB0057A22B /* Collegemate */ = {
 			isa = PBXGroup;
 			children = (
 				D41AD81B188F7BBB0057A22B /* Main.storyboard */,
@@ -179,6 +179,7 @@
 				D41AD821188F7BBB0057A22B /* Images.xcassets */,
 				D41AD810188F7BBB0057A22B /* Supporting Files */,
 			);
+			name = Collegemate;
 			path = Classmate;
 			sourceTree = "<group>";
 		};
@@ -191,27 +192,28 @@
 				D41AD841188F7F0E0057A22B /* green_light.png */,
 				D41AD842188F7F0E0057A22B /* green_light@2x.png */,
 				D41AD843188F7F0E0057A22B /* red_light.png */,
-				D41AD811188F7BBB0057A22B /* Classmate-Info.plist */,
+				D41AD811188F7BBB0057A22B /* Collegemate-Info.plist */,
 				D41AD812188F7BBB0057A22B /* InfoPlist.strings */,
 				D41AD815188F7BBB0057A22B /* main.m */,
-				D41AD817188F7BBB0057A22B /* Classmate-Prefix.pch */,
+				D41AD817188F7BBB0057A22B /* Collegemate-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		D41AD82E188F7BBC0057A22B /* ClassmateTests */ = {
+		D41AD82E188F7BBC0057A22B /* CollegemateTests */ = {
 			isa = PBXGroup;
 			children = (
 				D41AD834188F7BBC0057A22B /* ClassmateTests.m */,
 				D41AD82F188F7BBC0057A22B /* Supporting Files */,
 			);
+			name = CollegemateTests;
 			path = ClassmateTests;
 			sourceTree = "<group>";
 		};
 		D41AD82F188F7BBC0057A22B /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				D41AD830188F7BBC0057A22B /* ClassmateTests-Info.plist */,
+				D41AD830188F7BBC0057A22B /* CollegemateTests-Info.plist */,
 				D41AD831188F7BBC0057A22B /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
@@ -281,9 +283,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		D41AD805188F7BBB0057A22B /* Classmate */ = {
+		D41AD805188F7BBB0057A22B /* Collegemate */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D41AD838188F7BBC0057A22B /* Build configuration list for PBXNativeTarget "Classmate" */;
+			buildConfigurationList = D41AD838188F7BBC0057A22B /* Build configuration list for PBXNativeTarget "Collegemate" */;
 			buildPhases = (
 				137FE8B2B87B4440AC3EA72E /* Check Pods Manifest.lock */,
 				D41AD802188F7BBB0057A22B /* Sources */,
@@ -295,14 +297,14 @@
 			);
 			dependencies = (
 			);
-			name = Classmate;
+			name = Collegemate;
 			productName = Classmate;
-			productReference = D41AD806188F7BBB0057A22B /* Classmate.app */;
+			productReference = D41AD806188F7BBB0057A22B /* Collegemate.app */;
 			productType = "com.apple.product-type.application";
 		};
-		D41AD826188F7BBB0057A22B /* ClassmateTests */ = {
+		D41AD826188F7BBB0057A22B /* CollegemateTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D41AD83B188F7BBC0057A22B /* Build configuration list for PBXNativeTarget "ClassmateTests" */;
+			buildConfigurationList = D41AD83B188F7BBC0057A22B /* Build configuration list for PBXNativeTarget "CollegemateTests" */;
 			buildPhases = (
 				D41AD823188F7BBB0057A22B /* Sources */,
 				D41AD824188F7BBB0057A22B /* Frameworks */,
@@ -313,9 +315,9 @@
 			dependencies = (
 				D41AD82D188F7BBC0057A22B /* PBXTargetDependency */,
 			);
-			name = ClassmateTests;
+			name = CollegemateTests;
 			productName = ClassmateTests;
-			productReference = D41AD827188F7BBB0057A22B /* ClassmateTests.xctest */;
+			productReference = D41AD827188F7BBB0057A22B /* CollegemateTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -328,12 +330,15 @@
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = Classmate;
 				TargetAttributes = {
+					D41AD805188F7BBB0057A22B = {
+						DevelopmentTeam = 542JTP75B3;
+					};
 					D41AD826188F7BBB0057A22B = {
 						TestTargetID = D41AD805188F7BBB0057A22B;
 					};
 				};
 			};
-			buildConfigurationList = D41AD801188F7BBB0057A22B /* Build configuration list for PBXProject "Classmate" */;
+			buildConfigurationList = D41AD801188F7BBB0057A22B /* Build configuration list for PBXProject "CollegeMate.temp_caseinsensitive_rename" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -346,8 +351,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				D41AD805188F7BBB0057A22B /* Classmate */,
-				D41AD826188F7BBB0057A22B /* ClassmateTests */,
+				D41AD805188F7BBB0057A22B /* Collegemate */,
+				D41AD826188F7BBB0057A22B /* CollegemateTests */,
 			);
 		};
 /* End PBXProject section */
@@ -450,7 +455,7 @@
 /* Begin PBXTargetDependency section */
 		D41AD82D188F7BBC0057A22B /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = D41AD805188F7BBB0057A22B /* Classmate */;
+			target = D41AD805188F7BBB0057A22B /* Collegemate */;
 			targetProxy = D41AD82C188F7BBC0057A22B /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -561,10 +566,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Classmate/Classmate-Prefix.pch";
-				INFOPLIST_FILE = "Classmate/Classmate-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				GCC_PREFIX_HEADER = "Classmate/Collegemate-Prefix.pch";
+				INFOPLIST_FILE = "Classmate/Collegemate-Info.plist";
+				PRODUCT_NAME = Collegemate;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -575,10 +581,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Classmate/Classmate-Prefix.pch";
-				INFOPLIST_FILE = "Classmate/Classmate-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				GCC_PREFIX_HEADER = "Classmate/Collegemate-Prefix.pch";
+				INFOPLIST_FILE = "Classmate/Collegemate-Info.plist";
+				PRODUCT_NAME = Collegemate;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -599,8 +606,8 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = "ClassmateTests/ClassmateTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				INFOPLIST_FILE = "ClassmateTests/CollegemateTests-Info.plist";
+				PRODUCT_NAME = CollegemateTests;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
@@ -618,8 +625,8 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Classmate/Classmate-Prefix.pch";
-				INFOPLIST_FILE = "ClassmateTests/ClassmateTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				INFOPLIST_FILE = "ClassmateTests/CollegemateTests-Info.plist";
+				PRODUCT_NAME = CollegemateTests;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
@@ -628,7 +635,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		D41AD801188F7BBB0057A22B /* Build configuration list for PBXProject "Classmate" */ = {
+		D41AD801188F7BBB0057A22B /* Build configuration list for PBXProject "CollegeMate.temp_caseinsensitive_rename" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D41AD836188F7BBC0057A22B /* Debug */,
@@ -637,7 +644,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D41AD838188F7BBC0057A22B /* Build configuration list for PBXNativeTarget "Classmate" */ = {
+		D41AD838188F7BBC0057A22B /* Build configuration list for PBXNativeTarget "Collegemate" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D41AD839188F7BBC0057A22B /* Debug */,
@@ -646,7 +653,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D41AD83B188F7BBC0057A22B /* Build configuration list for PBXNativeTarget "ClassmateTests" */ = {
+		D41AD83B188F7BBC0057A22B /* Build configuration list for PBXNativeTarget "CollegemateTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D41AD83C188F7BBC0057A22B /* Debug */,
