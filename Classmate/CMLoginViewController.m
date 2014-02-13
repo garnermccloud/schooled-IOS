@@ -189,6 +189,17 @@
         NSMutableDictionary *user = [[NSMutableDictionary alloc] init];
         [user setValue:[self.createEmail.text lowercaseString] forKeyPath:@"email"];
         [user setValue:self.createPassword.text forKeyPath:@"password"];
+        
+        [self.meteor signupWithUsername:[self.createEmail.text lowercaseString] password:self.createPassword.text responseCallback:^(NSDictionary *response, NSError *error) {
+                if (error) {
+                    //NSLog(@"Error = %@", error);
+                        [self handleFailedAuth:error];
+                        return;
+                    }
+                [self handleSuccessfulAuth];
+            }];
+         
+        /*
 
         [self.meteor callMethodName:@"createUser" parameters:@[user] responseCallback:^(NSDictionary *response, NSError *error) {
             NSLog(@"response = %@", response);
@@ -196,16 +207,16 @@
                 NSString *errorMessage;
                 if ([[error localizedDescription] isKindOfClass:[NSString class]])
                 {
-                    errorMessage = [error localizedDescription];
+                    errorMessage = [error description];
                 } else {
-                    id errorId = [error localizedDescription];
+                    id errorId = [error description];
                     NSDictionary *errorDictionary = (NSDictionary *)errorId;
                     errorMessage = errorDictionary[@"reason"];
                 }
                 NSLog(@"Error = %@", errorMessage);
                 //NSDictionary *errorDictionary = (NSDictionary *)errorId;
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
-                                                                message:errorMessage
+                                                                message:@"test message"//errorMessage
                                                                delegate:nil
                                                       cancelButtonTitle:@"Try Again"
                                                       otherButtonTitles:nil];
@@ -213,23 +224,20 @@
                 
             }
             else {
+                [self handleSuccessfulAuth];
                 NSLog(@"Successful Create Meteor account");
                 [self.meteor logonWithUsername:[self.createEmail.text lowercaseString] password:self.createPassword.text responseCallback:^(NSDictionary *response, NSError *error) {
                     if (error) {
                         [self handleFailedAuth:error];
                         return;
                     } else {
-                        NSLog(@"Successful Login Meteor Client = %@", self.meteor);
-                        id pvc = self.presentingViewController;
-                        if ([pvc respondsToSelector:NSSelectorFromString(@"meteor")]) {
-                            NSLog(@"has meteor property");
-                            [pvc setValue:self.meteor forKey:@"meteor"];
-                        }
-                        [pvc dismissViewControllerAnimated:YES completion:nil];
+                        [self handleSuccessfulAuth];
                     }
-                }];
+                }]; 
+         
             }
         }];
+         */
     }
 }
 
@@ -270,6 +278,16 @@
         [alert show];
         
     }
+}
+
+- (void)handleSuccessfulAuth {
+    NSLog(@"Successful Login Meteor Client = %@", self.meteor);
+    id pvc = self.presentingViewController;
+    if ([pvc respondsToSelector:NSSelectorFromString(@"meteor")]) {
+        NSLog(@"has meteor property");
+        [pvc setValue:self.meteor forKey:@"meteor"];
+    }
+    [pvc dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (BOOL) validateEmailWithString:(NSString *)emailStr

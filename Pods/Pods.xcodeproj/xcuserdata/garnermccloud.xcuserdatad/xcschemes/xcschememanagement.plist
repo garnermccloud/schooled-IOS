@@ -8,49 +8,41 @@
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>2</integer>
 		</dict>
 		<key>Pods-SocketRocket.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>3</integer>
 		</dict>
 		<key>Pods-UICKeyChainStore.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>4</integer>
 		</dict>
 		<key>Pods.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>1</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>3696A0EC56B7432EBAA3AD14</key>
+		<key>19F0A82B4AE24237B6F3F6D9</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>6C10A29B059A4F3EAD9C53B4</key>
+		<key>5410C62A96714C1BB1DF5BE8</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>8DEF381989AE43AFA43E151F</key>
+		<key>714C5A1603084175AE3BDF05</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>E54996F4D64E451D80EED004</key>
+		<key>C0373F9ABDD1476C948F191D</key>
 		<dict>
 			<key>primary</key>
 			<true/>

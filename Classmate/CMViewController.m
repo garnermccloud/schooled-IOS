@@ -24,15 +24,15 @@
     [super viewDidLoad];
     CMAppDelegate *cmAppDelegate = (CMAppDelegate *)[[UIApplication sharedApplication] delegate];
     self.meteor = cmAppDelegate.meteorClient;
-    if (!self.meteor.userId) {
-        [self performSegueWithIdentifier:@"Login" sender:self];
-    }
+    //if (!self.meteor.userId) {
+    //    [self performSegueWithIdentifier:@"Login" sender:self];
+    //}
     
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
-    if (self.meteor.authState == 3) {
+    if (self.meteor.authState == 0) {
         [self performSegueWithIdentifier:@"Login" sender:self];
     }
     NSLog(@"Meteor Client = %@", self.meteor);
