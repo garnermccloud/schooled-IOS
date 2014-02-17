@@ -50,7 +50,7 @@
 
 - (NSString *)dueDate
 {
-    double dateInSeconds = [[self.task[@"commits"] lastObject][@"dueDate"] doubleValue] / 1000;
+    double dateInSeconds = ([[self.task[@"commits"] lastObject][@"dueDate"] doubleValue] / 1000) - [[NSTimeZone systemTimeZone] secondsFromGMT];
     NSDate *date = [NSDate dateWithTimeIntervalSince1970: dateInSeconds];
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"MM/dd/yyyy"];

@@ -135,7 +135,7 @@
     NSDictionary *task = self.tasks[indexPath.row];
     NSDictionary *mostRecentCommit = [task[@"commits"] lastObject];
     cell.textLabel.text = mostRecentCommit[@"title"];
-    double dateInSeconds = [mostRecentCommit[@"dueDate"] doubleValue] / 1000;
+    double dateInSeconds = [mostRecentCommit[@"dueDate"] doubleValue] / 1000 - [[NSTimeZone systemTimeZone] secondsFromGMT];
     NSDate *date = [NSDate dateWithTimeIntervalSince1970: dateInSeconds];
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"MM/dd/yyyy"];

@@ -65,7 +65,7 @@ tapScroll.cancelsTouchesInView = NO;
 
 - (NSDate *)dueDate
 {
-    double dateInSeconds = [[self.task[@"commits"] lastObject][@"dueDate"] doubleValue] / 1000;
+    double dateInSeconds = ([[self.task[@"commits"] lastObject][@"dueDate"] doubleValue] / 1000) - [[NSTimeZone systemTimeZone] secondsFromGMT];
     NSDate *date = [NSDate dateWithTimeIntervalSince1970: dateInSeconds];
     return date;
     
@@ -87,8 +87,16 @@ tapScroll.cancelsTouchesInView = NO;
     NSMutableDictionary *task = [[NSMutableDictionary alloc] init];
     [task setValue:self.taskId forKeyPath:@"_id"];
     [task setValue:self.titleField.text forKeyPath:@"title"];
-    double dateInMillisecondsSince1970 = [self.datePicker.date timeIntervalSince1970];
-    dateInMillisecondsSince1970 = dateInMillisecondsSince1970 * 1000;
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    [calendar setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
+    NSDateComponents* comps = [calendar components:NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit fromDate:self.datePicker.date];
+    double dateInSecondsSince1970 = [[calendar dateFromComponents:comps] timeIntervalSince1970];
+    
+    //date is off by a day for some reason, quick fix, correct later
+    //dateInSecondsSince1970 = dateInSecondsSince1970 - (60*60*24);
+    
+    double dateInMillisecondsSince1970 = dateInSecondsSince1970 * 1000;
+    NSLog(@"%f",dateInMillisecondsSince1970);
     NSNumber *date = [[NSNumber alloc] initWithDouble:dateInMillisecondsSince1970];
     [task setValue:date forKeyPath:@"dueDate"];
     [task setValue:self.notesTextView.text forKeyPath:@"notes"];

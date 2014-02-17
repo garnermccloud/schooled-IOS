@@ -59,9 +59,17 @@
 {
     NSPredicate *pred = [NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
         NSDictionary *task = evaluatedObject;
-        id valid= [task[@"commits"] lastObject][@"valid"];
+        id date = [task[@"commits"] lastObject][@"dueDate"];
+        id valid = [task[@"commits"] lastObject][@"valid"];
+        double dateDouble = [date doubleValue] / 1000;
+        NSDateComponents *dateComponents = [[NSDateComponents alloc] init];
+        dateComponents.day = 0;
+        NSCalendar *calendar = [NSCalendar currentCalendar];
+        [calendar setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
+        NSDateComponents* comps = [calendar components:NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit fromDate:[NSDate date]];
+        double todayInSecondsSince1970 = [[calendar dateFromComponents:comps] timeIntervalSince1970];
         NSNumber *validNumber = (NSNumber *) valid;
-        if ([self.currentUser[@"courses"] containsObject:task[@"courseId"]] && [validNumber isEqual: @(YES)]) {
+        if ([self.currentUser[@"courses"] containsObject:task[@"courseId"]] && [validNumber isEqual: @(YES)]  && !(dateDouble < todayInSecondsSince1970)) {
             return YES;
         } else {
             return NO;
@@ -111,7 +119,7 @@
     NSDictionary *task = self.tasks[indexPath.row];
     NSDictionary *mostRecentCommit = [task[@"commits"] lastObject];
     cell.titleLabel.text = mostRecentCommit[@"title"];
-    double dateInSeconds = [mostRecentCommit[@"dueDate"] doubleValue] / 1000;
+    double dateInSeconds = [mostRecentCommit[@"dueDate"] doubleValue] / 1000 - [[NSTimeZone systemTimeZone] secondsFromGMT];
     NSDate *date = [NSDate dateWithTimeIntervalSince1970: dateInSeconds];
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"MM/dd/yyyy"];
