@@ -7,6 +7,7 @@
 //
 
 #import "CMTaskAddViewController.h"
+#import "GAIDictionaryBuilder.h"
 
 @interface CMTaskAddViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *titleField;
@@ -41,6 +42,20 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:YES];
+    
+#pragma mark Google Analytics
+    // returns the same tracker you created in your app delegate
+    // defaultTracker originally declared in AppDelegate.m
+    id tracker = [[GAI sharedInstance] defaultTracker];
+    
+    // This screen name value will remain set on the tracker and sent with
+    // hits until it is set to a new value or to nil.
+    [tracker set:kGAIScreenName
+           value:@"Task Add"];
+    
+    // manual screen tracking
+    [tracker send:[[GAIDictionaryBuilder createAppView] build]];
+    
     [self reloadUI];
     
     [[NSNotificationCenter defaultCenter] addObserver:self

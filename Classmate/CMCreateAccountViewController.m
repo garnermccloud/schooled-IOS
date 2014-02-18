@@ -11,6 +11,7 @@
 #import <ObjectiveDDP/ObjectiveDDP.h>
 #import <ObjectiveDDP/MeteorClient.h>
 #import "CMCoursesTableViewController.h"
+#import "GAIDictionaryBuilder.h"
 
 @interface CMCreateAccountViewController ()
 
